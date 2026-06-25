@@ -1,0 +1,42 @@
+int trig=7;
+int echo=8;
+int ledB=12;
+int ledR=13;
+void setup(){
+  Serial.begin(9600);
+  pinMode(trig,OUTPUT);
+  pinMode(echo,INPUT);
+  pinMode(ledR,OUTPUT);
+  pinMode(ledB,OUTPUT);
+  
+}
+void loop(){
+  int dist,duration;
+  digitalWrite(trig,LOW);
+  delay(10);
+  digitalWrite(trig,HIGH);
+  delay(10);
+  digitalWrite(trig,LOW);
+  duration=pulseIn(echo,HIGH);
+
+  dist=(duration/2)/29.1;
+  delay(100);
+  Serial.print(dist);
+  Serial.print("CM");
+  Serial.println("");
+  if(dist<10)
+  {
+    digitalWrite(ledR,HIGH);
+    digitalWrite(ledB,LOW);
+  }
+  else if(dist<30)
+  {
+    digitalWrite(ledB,HIGH);
+    digitalWrite(ledR,LOW);
+  }
+  else{
+    digitalWrite(ledR,LOW);
+    digitalWrite(ledB,LOW);
+    
+  }
+}
